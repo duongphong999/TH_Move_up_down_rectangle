@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="game" width="800" height="600" style="border: 3px solid #000000;"></canvas>
+
+
+</body>
+<script>
+    let gameconText = document.getElementById("game").getContext("2d");
+    let caryPosition = 20;
+    let x=20;
+    let carwidth=150;
+    let carheight=100
+    let gameTopposition=0;
+    let gameBottomposition=600;
+    let timeLoop = 10;
+    function drawCar() {
+        gameconText.beginPath();//phương thức bắt đầu nét vẽ hiện tại hoặc thiết lập lại nét vẽ hiện tại
+        gameconText.fillStyle = '#fa4b2a';
+        gameconText.fillRect(x, caryPosition, carwidth, carheight);
+    }
+
+
+    function moveUp() {
+
+        gameconText.clearRect(x, caryPosition, carwidth, carheight);
+
+        if (caryPosition > 0)
+            caryPosition--;
+        drawCar();
+
+    }
+    function moveDown() {
+        gameconText.clearRect(x, caryPosition, carwidth, carheight);
+
+        if (caryPosition + 100 < 600)
+            caryPosition++;
+
+        drawCar();
+
+    }
+    let yDistance = 1;
+    
+    function moveCar() {
+        gameconText.clearRect(x, caryPosition, carwidth, carheight);
+        let isTouchTop = caryPosition<gameTopposition;
+        let isTouchbottom = caryPosition+carheight>gameBottomposition;
+        if(isTouchTop || isTouchbottom){
+            yDistance = -yDistance
+        }
+	caryPosition +=yDistance;
+	    drawCar();
+}
+    setInterval(moveCar, timeLoop);
+    // setInterval(moveDown,10);
+
+
+</script>
+
+</html>
